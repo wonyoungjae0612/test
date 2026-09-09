@@ -1,0 +1,13 @@
+node_modules/
+dist/
+release/
+test-results/
+playwright-report/
+.env
+.env.*
+!.env.example
+.netlify/
+.vercel/
+.DS_Store
+Thumbs.db
+*.log
