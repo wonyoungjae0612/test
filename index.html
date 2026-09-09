@@ -21,13 +21,13 @@
   </defs></svg>
   <header class="header">
     <a href="/" class="brand" aria-label="verif.ai 홈"><span class="brand-icon"><svg><use href="#i-scan"/></svg></span>verif<span class="brand-dot">.ai</span></a>
-    <span class="demo-badge"><span></span> 데모 버전</span>
+    <div class="header-meta"><span class="brand-caption">이미지를 보는 또 다른 시선</span><span class="demo-badge"><span></span> 데모 버전</span></div>
   </header>
   <main>
     <div class="page-heading">
       <div>
         <span class="eyebrow">A CLOSER LOOK</span>
-        <h1>AI 이미지 <span>판별</span></h1>
+        <h1>AI 이미지 <span>판별<svg class="title-spark" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2v28M2 16h28M6 6l20 20M6 26 26 6"/></svg></span></h1>
         <p>궁금한 이미지 한 장, 더 분명하게 확인하세요.</p>
       </div>
       <div class="workflow" aria-label="이용 순서"><span><b>1</b> 이미지 업로드</span><i aria-hidden="true"></i><span><b>2</b> 결과 확인</span></div>
@@ -38,7 +38,7 @@
         <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp" hidden>
         <div class="drop-zone" id="drop-zone">
           <div id="upload-prompt" class="upload-prompt">
-            <div class="upload-art" aria-hidden="true"><span class="art-card back"></span><span class="art-card front"><svg><use href="#i-image"/></svg></span><span class="art-upload"><svg><use href="#i-upload"/></svg></span></div>
+            <div class="upload-art" aria-hidden="true"><span class="art-card back"></span><span class="art-card front"><span class="mini-landscape"><span></span></span></span><span class="art-upload"><svg><use href="#i-upload"/></svg></span></div>
             <h3>어떤 이미지가 궁금하세요?</h3>
             <p>이미지를 드래그하거나 파일을 선택하세요.</p>
             <button type="button" class="select-button" id="select-file"><svg aria-hidden="true"><use href="#i-image"/></svg> 파일 선택</button>
