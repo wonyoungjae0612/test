@@ -122,7 +122,7 @@ analyzeButton.addEventListener('click', () => {
   errorMessage.hidden = true;
   dropZone.classList.add('busy');
   resultContent.setAttribute('aria-busy', 'true');
-  resultContent.innerHTML = '<div class="loading-result"><div class="spinner" aria-hidden="true"></div><h4>데모 결과를 준비하고 있어요</h4><p>실제 판별이 아닌 결과 화면 체험입니다.</p></div>';
+  resultContent.innerHTML = '<div class="loading-result"><div class="spinner" aria-hidden="true"></div><h3>데모 결과 준비 중…</h3></div>';
 
   // Fixed illustrative values. Replace with a real model API before presenting predictions.
   analysisTimer = setTimeout(() => {
@@ -132,20 +132,13 @@ analyzeButton.addEventListener('click', () => {
     resultState.textContent = '데모 완료';
     analyzeButton.disabled = false;
     analyzeButton.querySelector('span').textContent = '데모 다시 보기';
-    resultContent.innerHTML = '<div class="completed-result"><div class="result-label"><svg><use href="#i-info"/></svg> 예시 결과 · 실제 판별 아님</div><h4>AI 생성 가능성</h4><div class="score">72<span>%</span><small>화면 체험용 고정 수치</small></div><div class="score-bar" aria-hidden="true"><span></span></div><div class="score-legend"><span>AI 생성 72%</span><span>일반 이미지 28%</span></div><p class="demo-explanation">이 수치는 업로드한 이미지와 관계없는 예시입니다.<br>실제 분석 결과는 판별 모델 연결 후 제공됩니다.</p><button class="reset-button" id="try-again" type="button">다른 이미지 선택하기 ↗</button></div>';
+    resultContent.innerHTML = '<div class="completed-result"><div class="result-label"><svg aria-hidden="true"><use href="#i-info"/></svg> 예시 결과 · 실제 판별 아님</div><h3>AI 생성 가능성</h3><div class="score">72<span>%</span></div><div class="score-bar" aria-hidden="true"><span></span></div><div class="score-legend"><span>AI 생성 72%</span><span>일반 이미지 28%</span></div><p class="demo-explanation">업로드한 이미지와 관계없는 예시 수치입니다.</p><button class="reset-button" id="try-again" type="button">다른 이미지 선택</button></div>';
     document.getElementById('try-again').addEventListener('click', () => {
       resetUpload();
       document.getElementById('select-file').focus();
       fileInput.click();
     });
   }, 1600);
-});
-
-document.querySelectorAll('.nav-link').forEach(link => {
-  link.addEventListener('click', () => {
-    document.querySelectorAll('.nav-link').forEach(item => item.classList.remove('active'));
-    link.classList.add('active');
-  });
 });
 
 window.addEventListener('pagehide', () => {
