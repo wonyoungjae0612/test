@@ -1,5 +1,7 @@
 'use strict';
 
+import { classifyProbability } from './src/decision.js';
+
 const fileInput = document.getElementById('file-input');
 const dropZone = document.getElementById('drop-zone');
 const preview = document.getElementById('preview');
@@ -132,7 +134,8 @@ analyzeButton.addEventListener('click', () => {
     resultState.textContent = '데모 완료';
     analyzeButton.disabled = false;
     analyzeButton.querySelector('span').textContent = '데모 다시 보기';
-    resultContent.innerHTML = '<div class="completed-result"><div class="result-label"><svg aria-hidden="true"><use href="#i-info"/></svg> 예시 결과 · 실제 판별 아님</div><h3>AI 생성 가능성</h3><div class="score">72<span>%</span></div><div class="score-bar" aria-hidden="true"><span></span></div><div class="score-legend"><span>AI 생성 72%</span><span>일반 이미지 28%</span></div><p class="demo-explanation">업로드한 이미지와 관계없는 예시 수치입니다.</p><button class="reset-button" id="try-again" type="button">다른 이미지 선택</button></div>';
+    const example = classifyProbability(0.72);
+    resultContent.innerHTML = `<div class="completed-result"><div class="result-label"><svg aria-hidden="true"><use href="#i-info"/></svg> 예시 결과 · 실제 판별 아님</div><div class="decision-tag">${example.label}</div><h3>${example.title}</h3><div class="score">72<span>%</span></div><div class="score-legend"><span>AI 생성 가능성 · 예시</span></div><div class="score-bar" aria-hidden="true"><span></span></div><p class="demo-explanation">20% 초과·80% 미만은 확정하지 않습니다.<br>72%는 이미지와 관계없는 고정 예시이며, 모델 신뢰도나 정확도가 아닙니다.</p><button class="reset-button" id="try-again" type="button">다른 이미지 선택</button></div>`;
     document.getElementById('try-again').addEventListener('click', () => {
       resetUpload();
       document.getElementById('select-file').focus();

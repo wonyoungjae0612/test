@@ -234,6 +234,9 @@ h1 > span { position: relative; display: inline-flex; align-items: center; gap: 
   .upload-prompt h3 { font-size: 15px; }
   .score { font-size: 66px; }
 }
+.decision-tag { display: inline-flex; margin-top: 22px; padding: 6px 10px; border: 1px solid #dbc89555; border-radius: 6px; color: #f3dfad; background: #f3dfad0d; font-size: 11px; font-weight: 600; letter-spacing: 1px; }
+.decision-tag + h3 { margin-top: 10px; }
+.completed-result .score-legend { margin-bottom: 12px; }
 @media (prefers-reduced-motion: reduce) {
   *, *:before, *:after { animation: none !important; transition: none !important; }
 }

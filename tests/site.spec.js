@@ -20,6 +20,8 @@ test('production build supports upload, demo results and reset without transmitt
   await expect(page.locator('#result-state')).toHaveText('준비 중');
   await expect(page.locator('#result-state')).toHaveText('데모 완료');
   await expect(page.locator('#result-content')).toContainText('실제 판별 아님');
+  await expect(page.locator('.decision-tag')).toHaveText('UNKNOWN');
+  await expect(page.locator('.completed-result h3')).toHaveText('판별 불확실');
   await page.locator('#remove-file').click();
   await expect(page.locator('#preview')).toBeHidden();
   await expect(page.locator('#analyze-button')).toBeDisabled();
