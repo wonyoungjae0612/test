@@ -11,3 +11,11 @@ playwright-report/
 .DS_Store
 Thumbs.db
 *.log
+.tools/
+.venv/
+.local-state/
+__pycache__/
+.pytest_cache/
+*.pyc
+models/*
+!models/README.md

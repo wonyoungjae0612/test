@@ -21,6 +21,15 @@ jobs:
       - run: npm ci
       - run: npx playwright install --with-deps chromium
       - run: npm test
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt
+      - run: python -m pytest backend_tests -q
+      - run: npm run test:extension
+        env:
+          PYTHON_PATH: python
       - uses: actions/upload-artifact@v4
         if: failure()
         with:

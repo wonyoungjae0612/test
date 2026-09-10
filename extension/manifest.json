@@ -1,0 +1,12 @@
+{
+  "manifest_version": 3,
+  "name": "AI-Guard · 로컬 이미지 탐지",
+  "version": "0.1.0",
+  "description": "사용자가 켠 탭의 이미지를 PC 내부 AI-Guard 서비스로 분석합니다. 별도 로컬 서비스와 학습 모델이 필요합니다.",
+  "permissions": ["activeTab", "scripting", "storage"],
+  "host_permissions": ["http://127.0.0.1/*"],
+  "optional_host_permissions": ["https://*/*", "http://*/*"],
+  "background": { "service_worker": "background.js", "type": "module" },
+  "action": { "default_title": "AI-Guard", "default_popup": "popup.html" },
+  "content_security_policy": { "extension_pages": "script-src 'self'; object-src 'none'" }
+}

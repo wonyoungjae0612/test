@@ -27,7 +27,8 @@ Vercel 웹페이지는 다른 웹사이트의 이미지를 감지하거나 Windo
 | AI-Guard 브랜드·3종 판정 결과 화면 | 데모 구현 |
 | 초기 임계값 정책과 경계값 검사 | 구현됨, 운영 보정 전 |
 | 학습 모델·실측 정확도 74% | 파일 및 평가 결과 미확인 |
-| FastAPI·Chrome 자동 배지 | 미구현 |
+| FastAPI 상태·모델정보·판정 API | 구현·검증됨, 운영 모델 미연결 시 503 반환 |
+| Chrome 자동 배지 | 사용자 ON 탭의 img에 대해 구현·연동 검증됨 |
 | Windows 트레이·선택 영역 캡처 | 미구현 |
 | FFT·Grad-CAM·평가 실험 | 미구현 |
 
@@ -39,13 +40,13 @@ Vercel 웹페이지는 다른 웹사이트의 이미지를 감지하거나 Windo
 
 ## 2단계: 로컬 추론 API
 
-예정 구조: `app/main.py`, `app/inference/`, `app/common/`, `models/`.
+현재 구조: `app/main.py`, `app/config.py`, `app/service.py`, `app/inference/`, `models/`. [실행 안내](LOCAL-QUICKSTART.md)에 설치·검증 명령과 현재 제한을 기록한다.
 
 | API | 계약 |
 |---|---|
 | `GET /health` | 서비스 생존 여부와 모델 준비 여부를 따로 반환 |
 | `GET /model/info` | 버전, 입력 크기, 클래스 순서, 보정 상태, 임계값 |
-| `POST /predict` | multipart 이미지 1장 → 판정 결과 |
+| `POST /predict` | 원본 이미지 bytes 1장 → 판정 결과, Content-Type 지정 (임시 파일 저장 방지) |
 | `POST /predict/batch` | 단일 추론 안정화 후 추가 |
 
 예정 결과 필드: `label`, `ai_probability`, `confidence`, `decision`, `model_version`, `latency_ms`. `confidence`의 정의와 calibration 방법은 실제 모델을 확인한 후 명시한다. UNKNOWN은 제3의 학습 클래스 확률이 아니라 이진 확률의 판정 유보다. 처리 실패·모델 미연결은 오류로 반환하며 정상 UNKNOWN과 혼동하지 않는다.
@@ -58,7 +59,7 @@ Vercel 웹페이지는 다른 웹사이트의 이미지를 감지하거나 Windo
 
 ## 3단계: Chrome MVP
 
-Manifest V3 확장 프로그램에서 사용자가 허용한 사이트의 화면에 보이는 `<img>`부터 처리한다. MutationObserver와 가시성 관찰, 동시 요청 제한, 해시 캐시를 사용한다. 동적 이미지 변경·제거 시 배지와 요청 상태도 정리한다. 팝업 ON/OFF와 사이트 제외 기능을 제공한다.
+Manifest V3 확장 프로그램에서 사용자가 켠 탭의 화면에 보이는 `<img>`부터 처리한다. MutationObserver와 가시성 관찰, 동시 요청 제한, 서버 해시 캐시를 구현했다. 동적 이미지 변경·제거 시 배지와 요청 상태를 정리한다. 현재는 탭별 ON/OFF와 출처 변경 시 종료를 제공한다. 영구 사이트 허용·제외 목록은 후속 기능이다.
 
 이미지 바이트는 PC 내부 API로만 전달한다. 교차 출처 이미지·인증이 필요한 이미지의 접근 실패를 판정 결과로 위장하지 않는다. canvas·CSS background-image는 후속 범위다. 공개 웹사이트에 가짜 '실시간 탐지 ON' 토글을 만들지 않는다.
 

@@ -1,0 +1,9 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>AI-Guard</title><link rel="stylesheet" href="popup.css"><script src="popup.js" defer></script></head>
+<body><header><strong>AI<span>-Guard</span></strong><small>LOCAL DETECTOR</small></header>
+<p id="status" role="status">연결 확인 중…</p>
+<button id="toggle" type="button" disabled>이 탭에서 감지 켜기</button>
+<p class="note">직접 켠 탭의 보이는 이미지부터 확인합니다. 다른 사이트로 이동하면 감지가 꺼집니다.</p>
+<details><summary>로컬 서비스 연결</summary><label for="token">연결 토큰</label><input id="token" type="password" autocomplete="off" placeholder="로컬 서버의 token.txt 값"><button id="save" type="button">저장하고 연결 확인</button><p class="note">서버: 127.0.0.1:8765<br>확장 ID: <code id="extension-id"></code></p></details>
+<details><summary>외부 이미지 호스트 허용</summary><p class="note">이미지가 다른 서버(CDN)에 있을 때 해당 호스트만 허용하세요. 원본 사이트 접근 권한만으로는 분석할 수 없습니다.</p><label for="image-host">이미지 호스트 주소</label><input id="image-host" type="url" placeholder="https://images.example.com"><button id="allow-host" type="button">호스트 접근 허용</button><button id="remove-host" type="button">호스트 권한 해제</button></details>
+<footer>이미지 분석은 PC 내부에서 처리합니다.<br>학습 모델이 없으면 실제 판별은 제공되지 않습니다.</footer></body></html>
